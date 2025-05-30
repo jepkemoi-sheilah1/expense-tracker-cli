@@ -1,5 +1,10 @@
 # Expense Tracker CLI App
 
+## link to Expense-Tracker-CLI schema 
+```
+https://dbdiagram.io/d/Expense-Tracker-Application-683451b16980ade2eb6776d1
+
+```
 This is a simple command-line app built in Python that allows users to track their expenses using an SQLite database and SQLAlchemy ORM. The Expense Tracker helps users budget and track their expenses by allowing them to add, view, and delete expenses. It empowers users to create budgets for specific categories, log daily expenses, and track spending against their limits.
 
 ## Features
