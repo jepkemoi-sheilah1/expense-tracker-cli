@@ -4,24 +4,24 @@ def list_users():
     users = User.get_all(session)
     for u in users:
         print(f"{u.id}. {u.name}")
-
+# This function creates a new user.
 def create_user():
     name = input("Enter user name: ")
     user = User.create(session, name)
     print(f"User created with ID: {user.id}")
-
+# This function deletes a user by their ID .
 def delete_user():
     user_id = int(input("Enter user ID to delete: "))
     if User.delete(session, user_id):
         print("User deleted.")
     else:
         print("User not found.")
-
+# This function lists all categories with their IDs and names.
 def list_categories():
     categories = Category.get_all(session)
     for c in categories:
         print(f"{c.id}. {c.name}")
-
+# This function creates a new category, prompting the user for details and validating input.
 def create_category():
     from datetime import datetime
     name = input("Enter category name: ")
@@ -36,7 +36,7 @@ def create_category():
         budget = 0.0
     category = Category.create(session, name, budget)
     print(f"Category created with ID: {category.id} with budget ${budget:.2f}")
-
+# This function retrieves the total amount spent for a specific category in a given month and year.
 def get_total_spent_for_category_month(category_id, year=None, month=None):
     from datetime import datetime
     from sqlalchemy import func, extract
@@ -50,7 +50,7 @@ def get_total_spent_for_category_month(category_id, year=None, month=None):
         extract('month', Expense.date) == month
     ).scalar()
     return total_spent or 0.0
-
+# This function lists all categories with their budgets and total spent for the current month.
 def list_categories():
     from datetime import datetime
     categories = Category.get_all(session)
@@ -63,20 +63,20 @@ def list_categories():
         total_spent = get_total_spent_for_category_month(c.id, today.year, today.month)
         remaining = c.budget - total_spent
         print(f"{c.id}. {c.name} - Budget: ${c.budget:.2f}, Spent: ${total_spent:.2f}, Remaining: ${remaining:.2f}")
-
+# This function deletes a category by its ID.
 def delete_category():
     category_id = int(input("Enter category ID to delete: "))
     if Category.delete(session, category_id):
         print("Category deleted.")
     else:
         print("Category not found.")
-
+# This function lists all expenses.
 def list_expenses():
     expenses = Expense.get_all(session)
     for e in expenses:
         category_name = e.category.name if e.category else "No Category"
         print(f"{e.id}. {e.description} - ${e.amount} - Category: {category_name}")
-
+# This function adds a new expense, prompting the user for details and validating input.
 def add_expense():
     from datetime import datetime, date as date_class
     description = ""
@@ -94,7 +94,7 @@ def add_expense():
                 amount = None
         except ValueError:
             print("Invalid amount. Please enter a numeric value.")
-    # Show categories for user to select
+    # Show categories for user to select from
     categories = Category.get_all(session)
     if not categories:
         print("No categories found. Please create a category first.")
@@ -113,13 +113,13 @@ def add_expense():
                 print("Invalid category ID. Please select from the list.")
         except ValueError:
             print("Invalid input. Please enter a numeric category ID.")
-    # Automatically set date to today
+    # Automatically set date to the day the expense was added
     date = date_class.today()
     user_id_input = input("Enter user ID or leave blank: ")
     user_id = int(user_id_input) if user_id_input else None
     expense = Expense.create(session, amount=amount, description=description, date=date, user_id=user_id, category_id=category_id)
     print(f"Expense added with ID: {expense.id}")
-
+# This function calculates the total expenses for each user .
 def get_total_expenses_by_user():
     from sqlalchemy import func
     totals = session.query(
@@ -132,7 +132,7 @@ def get_total_expenses_by_user():
     print("Total expenses by user:")
     for name, total in totals:
         print(f"{name}: ${total:.2f}")
-
+# This function calculates the total expenses for category .
 def get_total_expenses_by_category():
     from sqlalchemy import func
     totals = session.query(
@@ -145,7 +145,7 @@ def get_total_expenses_by_category():
     print("Total expenses by category:")
     for name, total in totals:
         print(f"{name}: ${total:.2f}")
-
+# This function deletes an expense by its ID.
 def delete_expense():
     expense_id = int(input("Enter expense ID to delete: "))
     if Expense.delete(session, expense_id):
@@ -157,7 +157,7 @@ def list_totals():
     totals = Total.get_all(session)
     for t in totals:
         print(f"{t.id}. Month: {t.month}, Total Amount: {t.total_amount}")
-
+# This function creates a new total for a specific month, optionally associating it with a user.
 def create_total():
     month = input("Enter month (YYYY-MM): ")
     total_amount_input = input("Enter total amount or leave blank: ")
@@ -166,14 +166,14 @@ def create_total():
     user_id = int(user_id_input) if user_id_input else None
     total = Total.create(session, month=month, total_amount=total_amount, user_id=user_id)
     print(f"Total created with ID: {total.id}")
-
+# This function deletes a total by its ID.
 def delete_total():
     total_id = int(input("Enter total ID to delete: "))
     if Total.delete(session, total_id):
         print("Total deleted.")
     else:
         print("Total not found.")
-
+# This function updates the budget for a specific category.
 def update_category_budget():
     category_id = int(input("Enter category ID to update budget: "))
     category = Category.find_by_id(session, category_id)
