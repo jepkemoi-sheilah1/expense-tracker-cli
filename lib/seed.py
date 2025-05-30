@@ -15,4 +15,4 @@ for _ in range(10):
     )
     session.add(expense)
 session.commit()
-print("seeded database with 10 expenses.")
+print("expense has been added successfully")

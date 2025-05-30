@@ -1,38 +1,67 @@
-#  Expense Tracker CLI App
+# Expense Tracker CLI App
 
-This is a simple command-line app built in Python that allows users to track their expenses using an SQLite database and SQLAlchemy ORM.
+This is a simple command-line app built in Python that allows users to track their expenses using an SQLite database and SQLAlchemy ORM. The Expense Tracker helps users budget and track their expenses by allowing them to add, view, and delete expenses. It empowers users to create budgets for specific categories, log daily expenses, and track spending against their limits.
 
 ## Features
 
 - List all expenses
 - Add a new expense
-- Seed the database with fake data
+- Delete an expense
+- View totals by category or user
+- Budget Planning: View budgets and spending per category, update category budgets
 
-## File Structure
+## Directory Structure
 
-- `cli.py`: The main entry point for the CLI.
-- `models.py`: Contains SQLAlchemy model definitions.
-- `helpers.py`: Contains helper functions used by the CLI.
-- `seed.py`: Seeds the database with fake data using Faker.
-- `db/migrations/`: Contains Alembic migration files.
+- `lib/cli.py`: The main entry point for the CLI. Handles user interaction, menu display, and input processing.
+- `lib/helpers.py`: Contains helper functions used by the CLI to perform operations such as adding or listing expenses and managing budgets.
+- `lib/models.py`: Contains SQLAlchemy model definitions representing the data structures for users, categories, expenses, and totals.
+- `lib/seed.py`: Seeds the database with fake data using the Faker library to facilitate testing and development.
+- `lib/app.db/`: Contains the SQLite database file and Alembic migration files for managing database schema changes.
 
-## Running the App
+## Getting Started
 
-1. Install dependencies:
-    ```bash
-    pipenv install
-    pipenv shell
-    ```
+### Environment Setup
 
-2. Seed the database:
-    ```bash
-    python lib/seed.py
-    ```
+Install dependencies and activate the virtual environment:
 
-3. Run the CLI:
-    ```bash
-    python lib/cli.py
-    ```
+```bash
+pipenv install
+pipenv shell
+```
 
----
+### Database Setup
+
+Seed the database with initial data:
+
+```bash
+python lib/seed.py
+```
+
+### Running the CLI
+
+Start the CLI application:
+
+```bash
+python lib/cli.py
+```
+
+Follow the on-screen prompts to navigate through the menu options for managing users, categories, expenses, viewing totals, and budget planning.
+
+## Testing
+
+Manual testing is recommended by running the CLI and interacting with the menu options to verify functionality such as adding, listing, deleting expenses, and managing budgets.
+
+## Support / Contact
+
+For support or inquiries, please contact the project owner.
+
+## License
+
+This project is licensed under the MIT License.
+
+# owner
+GitHub account : jepkemoi-sheilah1
+Email : jepkemoishyllah@gmail.com 
+
+
 
